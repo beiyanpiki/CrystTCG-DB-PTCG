@@ -240,14 +240,14 @@
     {
         "name": "\u592a\u9633&\u6708\u4eae \u7279\u5178\u5361",
         "symbol": "SMP",
-        "release_date": "2022-10-27",
+        "release_date": "",
         "series": "Sun & Moon",
         "main_expansion": false
     },
     {
         "name": "\u5251&\u76fe \u7279\u5178\u5361",
         "symbol": "SVP",
-        "release_date": "2023-05-19",
+        "release_date": "",
         "series": "Sword & Shield",
         "main_expansion": false
     }

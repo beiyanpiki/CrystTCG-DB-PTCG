@@ -347,6 +347,9 @@ def main():
     database["SSP"].name = "剑&盾 特典卡"
     database["SMP"].symbol = 'SMP'
     database["SMP"].name = '太阳&月亮 特典卡'
+    database['SSP'].release_date = ''
+    database['SMP'].release_date = ''
+
 
     return database
 
