@@ -340,18 +340,16 @@ def main():
     del database['PROMO4']
     del database['PROMO6']
 
-    for k in database.keys():
+    for k, v in database.items():
         if database[k].symbol.find('PROMO') != -1:
             database[k].symbol = 'PROMO'
+        database[k].cards_num = len(v.cards)
     database["SSP"].symbol = 'SVP'
     database["SSP"].name = "剑&盾 特典卡"
     database["SMP"].symbol = 'SMP'
     database["SMP"].name = '太阳&月亮 特典卡'
     database['SSP'].release_date = ''
     database['SMP'].release_date = ''
-
-
-
 
     return database
 

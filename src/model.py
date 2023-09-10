@@ -323,6 +323,7 @@ class PSet:
     series: Series
     cards: List[Card]
     set_type: SetType
+    cards_num: int
 
     def __init__(self, name: str, symbol: str, release_date: Optional[str],
                  series_id: Series) -> None:
@@ -350,7 +351,7 @@ class PSet:
             'series': self.series.value,
             'main_expansion': self.set_type == SetType.MainExpansion,
             'cards': [card.__json__() for card in self.cards],
-            'card_num': len(self.cards)
+            'card_num': self.cards_num
         }
         if len(data['cards']) == 0:
             del data['cards']

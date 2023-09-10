@@ -5,7 +5,7 @@
         "release_date": "2022-10-28",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 211
     },
     {
         "name": "\u8865\u5145\u5305 \u6a2a\u7a7a\u51fa\u4e16 \u82cd",
@@ -13,7 +13,7 @@
         "release_date": "2022-10-28",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 204
     },
     {
         "name": "\u8865\u5145\u5305 \u6a2a\u7a7a\u51fa\u4e16 \u6cfd",
@@ -21,7 +21,7 @@
         "release_date": "2022-10-28",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 212
     },
     {
         "name": "\u8d77\u59cb\u5361\u7ec4 \u6a2a\u7a7a\u51fa\u4e16GX",
@@ -29,7 +29,7 @@
         "release_date": "2022-10-28",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 345
     },
     {
         "name": "\u8389\u8389\u827e\u7684\u58f0\u63f4\u4e13\u5c5e\u793c\u76d2",
@@ -37,7 +37,7 @@
         "release_date": "2022-11-11",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 5
     },
     {
         "name": "\u5f3a\u5316\u5305 \u5bf9\u6218\u7cbe\u82f1",
@@ -45,7 +45,7 @@
         "release_date": "2022-12-16",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 88
     },
     {
         "name": "\u4f0a\u5e03GX\u5957\u88c5\u793c\u76d2",
@@ -53,7 +53,7 @@
         "release_date": "2023-01-06",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 8
     },
     {
         "name": "\u8d77\u59cb\u5361\u7ec4 \u4ea4\u76f8\u8f89\u6620GX",
@@ -61,7 +61,7 @@
         "release_date": "2023-01-18",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 366
     },
     {
         "name": "\u8865\u5145\u5305 \u4ea4\u76f8\u8f89\u6620 \u6c90",
@@ -69,7 +69,7 @@
         "release_date": "2023-01-18",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 194
     },
     {
         "name": "\u8865\u5145\u5305 \u4ea4\u76f8\u8f89\u6620 \u9b41",
@@ -77,7 +77,7 @@
         "release_date": "2023-01-18",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 193
     },
     {
         "name": "\u8865\u5145\u5305 \u4ea4\u76f8\u8f89\u6620 \u5524",
@@ -85,7 +85,7 @@
         "release_date": "2023-01-18",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 192
     },
     {
         "name": "\u7cbe\u7075\u7403\u793c\u76d2\uff1a\u95ea\u8000\u5b9d\u53ef\u68a6",
@@ -93,7 +93,7 @@
         "release_date": "2023-03-17",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 15
     },
     {
         "name": "\u5f3a\u5316\u5305 \u70ab\u5947\u4e89\u80dc",
@@ -101,7 +101,7 @@
         "release_date": "2023-03-17",
         "series": "Sun & Moon",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 99
     },
     {
         "name": "\u963f\u5c14\u5b99\u65af&\u5e1d\u7259\u5362\u5361&\u5e15\u8def\u5947\u4e9aGX \u5361\u7ec4\u6784\u7b51\u8fdb\u9636\u793c\u76d2",
@@ -109,7 +109,7 @@
         "release_date": "2023-03-17",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 28
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u5956\u8d4f\u5305",
@@ -117,7 +117,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 48
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u94a2",
@@ -125,7 +125,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 26
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u6076",
@@ -133,7 +133,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 26
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u6597",
@@ -141,7 +141,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 26
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u8d85",
@@ -149,7 +149,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 23
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u96f7",
@@ -157,7 +157,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 23
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u6c34",
@@ -165,7 +165,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 27
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u706b",
@@ -173,7 +173,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 27
     },
     {
         "name": "\u5bf9\u6218\u6d3e\u5bf9\u7ec4\u5408 \u8349",
@@ -181,7 +181,7 @@
         "release_date": "2023-04-15",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 25
     },
     {
         "name": "\u6781\u5de8\u4e89\u950b \u5361\u7ec4\u6784\u7b51\u793c\u76d2",
@@ -189,7 +189,7 @@
         "release_date": "2023-05-19",
         "series": "Sword & Shield",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 32
     },
     {
         "name": "\u8d77\u59cb\u5361\u7ec4 \u6781\u5de8\u4e89\u950bV",
@@ -197,7 +197,7 @@
         "release_date": "2023-05-19",
         "series": "Sword & Shield",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 230
     },
     {
         "name": "\u8865\u5145\u5305 \u6781\u5de8\u4e89\u950b \u7130",
@@ -205,7 +205,7 @@
         "release_date": "2023-05-19",
         "series": "Sword & Shield",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 199
     },
     {
         "name": "\u8865\u5145\u5305 \u6781\u5de8\u4e89\u950b \u96f7",
@@ -213,7 +213,7 @@
         "release_date": "2023-05-19",
         "series": "Sword & Shield",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 217
     },
     {
         "name": "\u739b\u4fd0\u7684\u51b3\u5fc3\u4e13\u5c5e\u793c\u76d2",
@@ -221,7 +221,7 @@
         "release_date": "2023-06-18",
         "series": "Sword & Shield",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 2
     },
     {
         "name": "\u5f3a\u5316\u5305 \u6781\u5de8\u653b\u9632",
@@ -229,7 +229,7 @@
         "release_date": "2023-06-28",
         "series": "Sword & Shield",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 96
     },
     {
         "name": "\u8865\u5145\u5305 \u6d53\u58a8\u91cd\u5f69 \u975b",
@@ -237,7 +237,7 @@
         "release_date": "2023-08-18",
         "series": "Sword & Shield",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 143
     },
     {
         "name": "\u8865\u5145\u5305 \u6d53\u58a8\u91cd\u5f69 \u9ece",
@@ -245,7 +245,7 @@
         "release_date": "2023-08-18",
         "series": "Sword & Shield",
         "main_expansion": true,
-        "card_num": 0
+        "card_num": 143
     },
     {
         "name": "\u55b7\u706b\u9f99VMAX\u5bf9\u6218\u5957\u88c5\u793c\u76d2",
@@ -253,7 +253,7 @@
         "release_date": "2023-08-18",
         "series": "Sword & Shield",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 1
     },
     {
         "name": "\u55b7\u706b\u9f99VMAX\u6536\u85cf\u5957\u88c5\u793c\u76d2",
@@ -261,7 +261,7 @@
         "release_date": "2023-08-18",
         "series": "Sword & Shield",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 1
     },
     {
         "name": "\u8f89\u91d1\u80fd\u91cf\u793c\u76d2&\u8f89\u91d1\u80fd\u91cf\u8fdb\u9636\u793c\u76d2",
@@ -269,7 +269,7 @@
         "release_date": "2023-09-09",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 54
     },
     {
         "name": "\u592a\u9633&\u6708\u4eae \u7279\u5178\u5361",
@@ -277,7 +277,7 @@
         "release_date": "",
         "series": "Sun & Moon",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 72
     },
     {
         "name": "\u5251&\u76fe \u7279\u5178\u5361",
@@ -285,6 +285,6 @@
         "release_date": "",
         "series": "Sword & Shield",
         "main_expansion": false,
-        "card_num": 0
+        "card_num": 81
     }
 ]
