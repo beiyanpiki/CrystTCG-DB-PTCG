@@ -1,0 +1,3 @@
+[submodule "PTCG-CHS-Datasets"]
+	path = PTCG-CHS-Datasets
+	url = https://github.com/duanxr/PTCG-CHS-Datasets.git
