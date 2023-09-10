@@ -10,8 +10,8 @@ class Series(Enum):
 
 
 class SetType(Enum):
-    MainExpansion = '0'
-    SideProduct = '1'
+    MainExpansion = 0
+    SideProduct = 1
 
 
 class CardType(Enum):
@@ -322,6 +322,7 @@ class PSet:
     release_date: Optional[str]
     series: Series
     cards: List[Card]
+    set_type: SetType
 
     def __init__(self, name: str, symbol: str, release_date: Optional[str],
                  series_id: Series) -> None:
@@ -331,12 +332,23 @@ class PSet:
         self.series = series_id
         self.cards = []
 
+        if symbol in [
+            # SM
+            'CSM1aC', 'CSM1bC', 'CSM1cC', 'CSM1.5C', 'CSM2aC', 'CSM2bC', 'CSM2cC', 'CSM2.5C',
+            # SS
+            'CS1aC', 'CS1bC', 'CS1.5C', 'CS2aC', 'CS2bC'
+        ]:
+            self.set_type = SetType.MainExpansion
+        else:
+            self.set_type = SetType.SideProduct
+
     def __json__(self):
         data = {
             'name': self.name,
             'symbol': self.symbol,
             'release_date': self.release_date,
             'series': self.series.value,
+            'main_expansion': self.set_type == SetType.MainExpansion,
             'cards': [card.__json__() for card in self.cards]
         }
         if len(data['cards']) == 0:
