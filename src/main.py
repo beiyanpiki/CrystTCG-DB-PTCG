@@ -320,6 +320,7 @@ def main():
         if k in ['PROMO1', 'PROMO2']:
             for card in v.cards:
                 c = card
+                c.collection_attr.set_symbol = 'SMP'
                 if c.collection_attr.card_no is None:
                     cnt += 1
                     c.collection_attr.card_no = f'NaN{cnt}'
@@ -327,9 +328,10 @@ def main():
 
     cnt = 0
     for k, v in database.items():
-        if k in ['PROMO4', 'PROMO6']:
+        if k in ['PROMO4', 'PROMO6', 'PROMO7', 'PROMO8']:
             for card in v.cards:
                 c = card
+                c.collection_attr.set_symbol = 'SVP'
                 if c.collection_attr.card_no is None:
                     cnt += 1
                     c.collection_attr.card_no = f'NaN{cnt}'
@@ -343,6 +345,11 @@ def main():
     for k, v in database.items():
         if database[k].symbol.find('PROMO') != -1:
             database[k].symbol = 'PROMO'
+            for i in range(len(database[k].cards)):
+                if database[k].series == Series.SM:
+                    database[k].cards[i].collection_attr.set_symbol = 'SMP'
+                elif database[k].series == Series.SS:
+                    database[k].cards[i].collection_attr.set_symbol = 'SSP'
         database[k].cards_num = len(v.cards)
     database["SSP"].symbol = 'SVP'
     database["SSP"].name = "剑&盾 特典卡"
@@ -372,11 +379,11 @@ if __name__ == '__main__':
 
     sets = []
     for k, v in data.items():
-        folder = Path(f'../output/img/{k}')
-        folder.mkdir(parents=True, exist_ok=True)
         for card in v.cards:
             src = f'../PTCG-CHS-Datasets/{card.img_path}'
-            dst = f'../output/img/{k}/{card.collection_attr.card_no}.jpg'
+            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'
+            folder = Path(f'../output/img/{card.collection_attr.set_symbol}')
+            folder.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
         sets.append(v)
 

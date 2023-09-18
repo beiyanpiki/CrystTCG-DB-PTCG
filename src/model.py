@@ -318,6 +318,7 @@ class Card:
 
 class PSet:
     name: str
+    set_id: str
     symbol: str
     release_date: Optional[str]
     series: Series
@@ -329,6 +330,7 @@ class PSet:
                  series_id: Series) -> None:
         self.name = name
         self.symbol = symbol
+        self.set_id = symbol
         self.release_date = release_date
         self.series = series_id
         self.cards = []
@@ -346,6 +348,7 @@ class PSet:
     def __json__(self):
         return {
             'name': self.name,
+            'set_id': self.set_id,
             'symbol': self.symbol,
             'release_date': self.release_date,
             'series': self.series.value,
