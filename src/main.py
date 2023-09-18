@@ -331,7 +331,7 @@ def main():
         if k in ['PROMO4', 'PROMO6', 'PROMO7', 'PROMO8']:
             for card in v.cards:
                 c = card
-                c.collection_attr.set_symbol = 'SVP'
+                c.collection_attr.set_symbol = 'SSP'
                 if c.collection_attr.card_no is None:
                     cnt += 1
                     c.collection_attr.card_no = f'NaN{cnt}'
