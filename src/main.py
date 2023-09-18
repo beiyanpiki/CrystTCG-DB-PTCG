@@ -358,6 +358,10 @@ def main():
     database['SSP'].release_date = ''
     database['SMP'].release_date = ''
 
+    for k, v in database.items():
+        if k == 'SMP':
+            database[k].cards = [c for c in database[k].cards if c.collection_attr.card_no is not None]
+        database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
     return database
 
 
