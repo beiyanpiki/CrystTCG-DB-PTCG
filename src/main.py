@@ -351,7 +351,7 @@ def main():
                 elif database[k].series == Series.SS:
                     database[k].cards[i].collection_attr.set_symbol = 'SSP'
         database[k].cards_num = len(v.cards)
-    database["SSP"].symbol = 'SVP'
+    database["SSP"].symbol = 'SSP'
     database["SSP"].name = "剑&盾 特典卡"
     database["SMP"].symbol = 'SMP'
     database["SMP"].name = '太阳&月亮 特典卡'
