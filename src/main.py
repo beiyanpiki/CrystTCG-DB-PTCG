@@ -371,11 +371,6 @@ if __name__ == '__main__':
     data = main()
 
     sets = []
-    with open('../output/cards.json', 'w') as f:
-        f.write(convert_to_json(data))
-    with open('../output/cards_min.json', 'w') as f:
-        f.write(convert_to_json(data, compress=True))
-
     for k, v in data.items():
         folder = Path(f'../output/img/{k}')
         folder.mkdir(parents=True, exist_ok=True)
@@ -383,8 +378,6 @@ if __name__ == '__main__':
             src = f'../PTCG-CHS-Datasets/{card.img_path}'
             dst = f'../output/img/{k}/{card.collection_attr.card_no}.jpg'
             shutil.copy2(src, dst)
-
-        v.cards = []
         sets.append(v)
 
     with open('../output/sets.json', 'w') as f:

@@ -344,7 +344,7 @@ class PSet:
             self.set_type = SetType.SideProduct
 
     def __json__(self):
-        data = {
+        return {
             'name': self.name,
             'symbol': self.symbol,
             'release_date': self.release_date,
@@ -353,6 +353,3 @@ class PSet:
             'cards': [card.__json__() for card in self.cards],
             'cards_num': self.cards_num
         }
-        if len(data['cards']) == 0:
-            del data['cards']
-        return data
