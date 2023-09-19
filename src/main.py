@@ -351,17 +351,27 @@ def main():
                 elif database[k].series == Series.SS:
                     database[k].cards[i].collection_attr.set_symbol = 'SSP'
         database[k].cards_num = len(v.cards)
+
     database["SSP"].symbol = 'SSP'
+    database["SSP"].set_id = 'SSP'
     database["SSP"].name = "剑&盾 特典卡"
     database["SMP"].symbol = 'SMP'
+    database["SMP"].set_id = 'SMP'
     database["SMP"].name = '太阳&月亮 特典卡'
     database['SSP'].release_date = ''
     database['SMP'].release_date = ''
 
     for k, v in database.items():
+        if k in ['CSMPaC', 'CSMPbC', 'CSMPcC', 'CSMPdC', 'CSMPeC', 'CSMPfC', 'CSMPgC', 'CSMPhC', ]:
+            database[k].cards = [c for c in database[k].cards if
+                                 not (c.type == CardType.BasicEnergy and c.regulation_mark == 'C')]
+
+    for k, v in database.items():
         if k == 'SMP':
+            # PROMO has overlap cards
             database[k].cards = [c for c in database[k].cards if c.collection_attr.card_no is not None]
         database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
+
     return database
 
 
@@ -384,6 +394,8 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
+            if card.name == '皮卡丘':
+                print(card.name, card.img_path, '--', card.collection_attr.set_symbol, card.collection_attr.card_no)
             src = f'../PTCG-CHS-Datasets/{card.img_path}'
             dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}')
