@@ -363,6 +363,9 @@ def main():
     database["SMP"].name = '太阳&月亮 特典卡'
     database['SSP'].release_date = ''
     database['SMP'].release_date = ''
+    database['PROMO-MARNIE'].set_id = 'PROMO-MARNIE'
+    database['PROMO-CharizardA'].set_id = 'PROMO-CharizardA'
+    database['PROMO-CharizardB'].set_id = 'PROMO-CharizardB'
 
     for k, v in database.items():
         if k in ['CSMPaC', 'CSMPbC', 'CSMPcC', 'CSMPdC', 'CSMPeC', 'CSMPfC', 'CSMPgC', 'CSMPhC', ]:
