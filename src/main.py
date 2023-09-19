@@ -313,6 +313,9 @@ def main():
 
     database["SMP"] = database.pop("PROMO")
     database['SSP'] = database.pop("PROMO3")
+    database['PROMO-MARNIE'] = database.pop("PROMO5")
+    database['PROMO-CharizardA'] = database.pop("PROMO7")
+    database['PROMO-CharizardB'] = database.pop("PROMO8")
 
     # Combine PROMO
     cnt = 0
@@ -328,7 +331,7 @@ def main():
 
     cnt = 0
     for k, v in database.items():
-        if k in ['PROMO4', 'PROMO6', 'PROMO7', 'PROMO8']:
+        if k in ['PROMO4', 'PROMO6', 'PROMO-CharizardA', 'PROMO-CharizardB']:
             for card in v.cards:
                 c = card
                 c.collection_attr.set_symbol = 'SSP'
@@ -372,6 +375,7 @@ def main():
             database[k].cards = [c for c in database[k].cards if c.collection_attr.card_no is not None]
         database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
 
+
     return database
 
 
@@ -394,8 +398,6 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
-            if card.name == '皮卡丘':
-                print(card.name, card.img_path, '--', card.collection_attr.set_symbol, card.collection_attr.card_no)
             src = f'../PTCG-CHS-Datasets/{card.img_path}'
             dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}')
