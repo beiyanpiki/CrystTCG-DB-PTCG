@@ -385,6 +385,10 @@ def main():
         if k == 'SMP':
             # PROMO has overlap cards
             database[k].cards = [c for c in database[k].cards if c.collection_attr.card_no is not None]
+        if v.name.find('强化包') != -1:
+            database[k].name = database[k].name[4:]
+        if v.name.find('补充包') != -1:
+            database[k].name = database[k].name[4:]
         database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
 
         # Fix error
