@@ -1,7 +1,7 @@
 import json
 import shutil
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Dict
 
 from src.model import PSet, Series, Label, CardType, Mechanic, CollectionAttr, Rarity, PokemonAttr, Energy, Stage, \
     Ability, Resistance, Attack, Card, Weakness, EnergyAttr
@@ -274,6 +274,15 @@ def sort_cards_by_card_no(card: Card):
         return 2, card_no
 
 
+def fix_card(database: Dict[str, PSet]):
+    # SSP-138
+    for (i, c) in enumerate(database['SSP'].cards):
+        if c.collection_attr.card_no == '138':
+            database['SSP'].cards[i].pokemon_attr.attacks[0].cost = [Energy.Colorless]
+            break
+    return database
+
+
 def main():
     database = {}
     for collection in collections:
@@ -378,6 +387,8 @@ def main():
             database[k].cards = [c for c in database[k].cards if c.collection_attr.card_no is not None]
         database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
 
+        # Fix error
+    database = fix_card(database)
 
     return database
 
