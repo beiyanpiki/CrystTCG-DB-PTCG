@@ -247,13 +247,13 @@ def get_card_text(card, card_type) -> str:
                 res += f"{attack['abilityName']}\t{attack['abilityDamage'] if attack['abilityDamage'] != 'none' else ''}\n{attack['abilityText'] if attack['abilityText'] != 'none' else ''}\n"
     elif card_type != CardType.BasicEnergy:
         r = card['details']['ruleText']
-        r = r.replace("|在自己的回合可以使用任意张物品卡。", '')
-        r = r.replace('宝可梦道具可以附着在自己的宝可梦身上。每只宝可梦身上只可以附着1张宝可梦道具，并保持附加状态。|', '')
-        r = r.replace('|在自己的回合只可以使用1张支援者卡。', '')
+        r = r.replace("在自己的回合可以使用任意张物品卡。", '')
+        r = r.replace('宝可梦道具可以附着在自己的宝可梦身上。每只宝可梦身上只可以附着1张宝可梦道具，并保持附加状态。', '')
+        r = r.replace('在自己的回合只可以使用1张支援者卡。', '')
         r = r.replace(
-            '|在自己的回合只可以将1张竞技场卡放到战斗区旁。如果有别的名称的竞技场卡被放入场上，则将此卡放入弃牌区。', '')
-        r = r.replace('|在1副卡组中只能放入1张同名的◇（棱镜之星）卡。这张卡牌不会被放入弃牌区，而会被放入放逐区。', '')
-        r = r.replace('|在自己的回合只可以使用1张支援者卡', '')
+            '在自己的回合只可以将1张竞技场卡放到战斗区旁。如果有别的名称的竞技场卡被放入场上，则将此卡放入弃牌区。', '')
+        r = r.replace('在1副卡组中只能放入1张同名的◇（棱镜之星）卡。这张卡牌不会被放入弃牌区，而会被放入放逐区。', '')
+        r = r.replace('在自己的回合只可以使用1张支援者卡', '')
         r = r.replace('|', '')
         res += f"{r}\n"
     else:
@@ -416,6 +416,9 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
+            if card.collection_attr.set_symbol=='SSP' and card.collection_attr.card_no=='028':
+                print(card.img_path)
+
             src = f'../PTCG-CHS-Datasets/{card.img_path}'
             dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}')
