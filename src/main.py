@@ -367,17 +367,19 @@ def main():
     database["SSP"].symbol = 'SSP'
     database["SSP"].set_id = 'SSP'
     database["SSP"].name = "剑&盾 特典卡"
+    database['SSP'].release_date = ''
+
     database["SMP"].symbol = 'SMP'
     database["SMP"].set_id = 'SMP'
     database["SMP"].name = '太阳&月亮 特典卡'
-    database['SSP'].release_date = ''
     database['SMP'].release_date = ''
+
     database['PROMO-MARNIE'].set_id = 'PROMO-MARNIE'
     database['PROMO-CharizardA'].set_id = 'PROMO-CharizardA'
     database['PROMO-CharizardB'].set_id = 'PROMO-CharizardB'
 
     for k, v in database.items():
-        if k in ['CSMPaC', 'CSMPbC', 'CSMPcC', 'CSMPdC', 'CSMPeC', 'CSMPfC', 'CSMPgC', 'CSMPhC', ]:
+        if k in ['CSMPaC', 'CSMPbC', 'CSMPcC', 'CSMPdC', 'CSMPeC', 'CSMPfC', 'CSMPgC', 'CSMPhC']:
             database[k].cards = [c for c in database[k].cards if
                                  not (c.type == CardType.BasicEnergy and c.regulation_mark == 'C')]
 
@@ -416,7 +418,7 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
-            if card.collection_attr.set_symbol=='SSP' and card.collection_attr.card_no=='028':
+            if card.collection_attr.set_symbol == 'SSP' and card.collection_attr.card_no == '028':
                 print(card.img_path)
 
             src = f'../PTCG-CHS-Datasets/{card.img_path}'
