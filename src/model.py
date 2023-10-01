@@ -1,3 +1,4 @@
+from datetime import datetime
 import hashlib
 from enum import Enum
 from typing import List, Optional
@@ -255,7 +256,7 @@ class Card:
     name: str
     text: str
     type: CardType
-    mechanic: Mechanic
+    mechanic: Optional[Mechanic]
     label: Optional[Label]
     pokemon_attr: Optional[PokemonAttr]
     energy_attr: Optional[EnergyAttr]
@@ -346,6 +347,10 @@ class PSet:
             self.set_type = SetType.SideProduct
 
     def __json__(self):
+        if self.release_date:
+            input_format = "%Y-%m-%dT%H:%M:%S" if 'T' in self.release_date else "%Y-%m-%d"
+            self.release_date = datetime.strptime(self.release_date, input_format).isoformat()
+
         return {
             'name': self.name,
             'set_id': self.set_id,

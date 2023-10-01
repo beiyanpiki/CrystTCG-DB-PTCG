@@ -421,9 +421,9 @@ if __name__ == '__main__':
             if card.collection_attr.set_symbol == 'SSP' and card.collection_attr.card_no == '028':
                 print(card.img_path)
 
-            src = f'../PTCG-CHS-Datasets/{card.img_path}'
-            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'
-            folder = Path(f'../output/img/{card.collection_attr.set_symbol}')
+            src = f'../PTCG-CHS-Datasets/{card.img_path}'.replace('\\', '/')
+            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'.replace('\\', '/')
+            folder = Path(f'../output/img/{card.collection_attr.set_symbol}'.replace('\\', '/'))
             folder.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
         sets.append(v)
