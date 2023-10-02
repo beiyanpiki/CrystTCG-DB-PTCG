@@ -367,12 +367,12 @@ def main():
     database["SSP"].symbol = 'SSP'
     database["SSP"].set_id = 'SSP'
     database["SSP"].name = "剑&盾 特典卡"
-    database['SSP'].release_date = ''
+    database['SSP'].release_date = None
 
     database["SMP"].symbol = 'SMP'
     database["SMP"].set_id = 'SMP'
     database["SMP"].name = '太阳&月亮 特典卡'
-    database['SMP'].release_date = ''
+    database['SMP'].release_date = None
 
     database['PROMO-MARNIE'].set_id = 'PROMO-MARNIE'
     database['PROMO-CharizardA'].set_id = 'PROMO-CharizardA'
