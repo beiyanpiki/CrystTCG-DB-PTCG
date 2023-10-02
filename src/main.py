@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Optional, Tuple, Dict
 
 from src.model import PSet, Series, Label, CardType, Mechanic, CollectionAttr, Rarity, PokemonAttr, Energy, Stage, \
-    Ability, Resistance, Attack, Card, Weakness, EnergyAttr
+    Ability, Resistance, Attack, Card, EnergyAttr
 
 raw_json_path = '../PTCG-CHS-Datasets/ptcg_chs_infos.json'
 
@@ -206,9 +206,8 @@ def get_pokemon_attr(card) -> PokemonAttr:
     ancient_trait = None
 
     weakness_type = card['details'].get('weaknessType', None)
-    weakness_value = card['details'].get('weaknessFormula', None)
     if weakness_type is not None:
-        weakness = Weakness(get_energy_by_eid_yorenid(weakness_type), weakness_value)
+        weakness = get_energy_by_eid_yorenid(weakness_type)
     else:
         weakness = None
 

@@ -108,21 +108,6 @@ class Resistance:
         }
 
 
-class Weakness:
-    weakness_type: Energy
-    weakness_value: str
-
-    def __init__(self, weakness_type: Energy, weakness_value: str) -> None:
-        self.weakness_type = weakness_type
-        self.weakness_value = weakness_value
-
-    def __json__(self):
-        return {
-            "weakness_type": self.weakness_type.value,
-            "weakness_value": self.weakness_value
-        }
-
-
 class Attack:
     name: str
     text: str
@@ -169,7 +154,7 @@ class PokemonAttr:
     hp: int
     ability: Optional[Ability]
     ancient_trait: Optional[AncientTrait]
-    weakness: Optional[Weakness]
+    weakness: Optional[Energy]
     resistance: Optional[Resistance]
     retreat_cost: int
     pokedex: str
@@ -181,7 +166,7 @@ class PokemonAttr:
                  hp: int,
                  ability: Optional[Ability],
                  ancient_trait: Optional[AncientTrait],
-                 weakness: Optional[Weakness],
+                 weakness: Optional[Energy],
                  resistance: Optional[Resistance],
                  retreat_cost: int,
                  pokedex: str,
@@ -205,7 +190,7 @@ class PokemonAttr:
             'hp': self.hp,
             'ability': self.ability.__json__() if self.ability else None,
             'ancient_trait': self.ancient_trait.value if self.ancient_trait else None,
-            'weakness': self.weakness.__json__() if self.weakness else None,
+            'weakness': self.weakness.value if self.weakness else None,
             'resistance': self.resistance.__json__() if self.resistance else None,
             'retreat_cost': self.retreat_cost,
             'pokedex': self.pokedex,
@@ -293,10 +278,10 @@ class Card:
             self.effect_id = (f"{self.name}|"
                               f"{self.pokemon_attr.stage.value}|"
                               f"{self.pokemon_attr.hp}|"
+                              f"{self.pokemon_attr.energy_type.value}|"
                               f"{self.pokemon_attr.ability.name if self.pokemon_attr.ability else ''}|"
                               f"{[attack.name for attack in self.pokemon_attr.attacks]}|"
-                              f"{self.pokemon_attr.weakness.weakness_type if self.pokemon_attr.weakness else ''}|"
-                              f"{self.pokemon_attr.weakness.weakness_value if self.pokemon_attr.weakness else ''}|"
+                              f"{self.pokemon_attr.weakness.value if self.pokemon_attr.weakness else ''}|"
                               f"{self.pokemon_attr.resistance.resistance_type.value if self.pokemon_attr.resistance else ''}|"
                               f"{self.pokemon_attr.resistance.resistance_value if self.pokemon_attr.resistance else ''}|"
                               f"{self.pokemon_attr.retreat_cost}")
