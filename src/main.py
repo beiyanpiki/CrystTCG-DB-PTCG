@@ -223,7 +223,7 @@ def get_pokemon_attr(card) -> PokemonAttr:
     attacks = []
     for attack in card['details']['abilityItemList']:
         atk_name = attack['abilityName']
-        atk_text = attack['abilityText']
+        atk_text = "" if attack['abilityText'] == 'none' else attack['abilityText']
         atk_cost = attack.get('abilityCost', '')
         atk_cost = ['none'] if atk_cost == '' else [elem for elem in atk_cost.split(',') if elem != ""]
         for i in range(len(atk_cost)):
