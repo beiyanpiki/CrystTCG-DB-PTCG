@@ -222,14 +222,19 @@ def get_pokemon_attr(card) -> PokemonAttr:
 
     attacks = []
     for attack in card['details']['abilityItemList']:
-        atk_name = attack['abilityName']
+        atk_name = "" if attack['abilityName'] =='none' else attack['abilityName']
         atk_text = "" if attack['abilityText'] == 'none' else attack['abilityText']
+        atk_damage = "" if attack['abilityDamage'] == 'none' else attack['abilityDamage']
+
+        if atk_name=="" and atk_text=="" and atk_damage=="":
+            continue
+
         atk_cost = attack.get('abilityCost', '')
         atk_cost = ['none'] if atk_cost == '' else [elem for elem in atk_cost.split(',') if elem != ""]
         for i in range(len(atk_cost)):
             e = get_energy_by_eid_yorenid(atk_cost[i])
             atk_cost[i] = e
-        atk_damage = None if attack['abilityDamage'] == 'none' else attack['abilityDamage']
+
         atk = Attack(atk_name, atk_text, atk_cost, atk_damage)
         attacks.append(atk)
     return PokemonAttr(energy_type, stage, hp, ability, ancient_trait, weakness, resistance, retreat_cost, pokedex,

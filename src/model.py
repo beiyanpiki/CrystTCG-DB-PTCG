@@ -112,13 +112,13 @@ class Attack:
     name: str
     text: str
     cost: List[Energy]
-    damage: Optional[str]
+    damage: str
 
     def __init__(self,
                  name: str,
                  text: str,
                  cost: List[Energy],
-                 damage: Optional[str]) -> None:
+                 damage: str) -> None:
         self.name = name
         self.text = text
         self.cost = cost
