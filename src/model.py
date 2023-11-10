@@ -333,7 +333,7 @@ class PSet:
             # SM
             'CSM1aC', 'CSM1bC', 'CSM1cC', 'CSM1.5C', 'CSM2aC', 'CSM2bC', 'CSM2cC', 'CSM2.5C',
             # SS
-            'CS1aC', 'CS1bC', 'CS1.5C', 'CS2aC', 'CS2bC', 'CS2.5C'
+            'CS1aC', 'CS1bC', 'CS1.5C', 'CS2aC', 'CS2bC', 'CS2.5C', 'CS3aC', 'CS3bC'
         ]:
             self.set_type = SetType.MainExpansion
         else:
