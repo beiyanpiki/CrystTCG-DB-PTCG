@@ -30,6 +30,8 @@ def get_series(series_id: str, set_name: str) -> Series:
             series_id = '2'
         case '2023宝可梦卡牌大师赛·北京 特典':
             series_id = '2'
+        case '2023宝可梦卡牌大师赛·深圳 特典':
+            series_id = '2'
 
     if series_id == '1':
         return Series.SM
@@ -114,6 +116,8 @@ def get_rarity(card) -> Rarity:
             return Rarity.SuperRare
         case 'SSR':
             return Rarity.ShinySuperRare
+        case 'CSR':
+            return Rarity.CharacterSuperRare
         case 'CHR':
             return Rarity.CharacterRare
         case 'A':
@@ -329,6 +333,8 @@ def main():
     database['PROMO-MARNIE'] = database.pop("PROMO5")
     database['PROMO-CharizardA'] = database.pop("PROMO7")
     database['PROMO-CharizardB'] = database.pop("PROMO8")
+    database['PROMO-1stA'] = database.pop("PROMO10")
+    database['PROMO-1stB'] = database.pop("PROMO11")
 
     # Combine PROMO
     cnt = 0
@@ -344,7 +350,7 @@ def main():
 
     cnt = 0
     for k, v in database.items():
-        if k in ['PROMO4', 'PROMO6', 'PROMO-CharizardA', 'PROMO-CharizardB']:
+        if k in ['PROMO4', 'PROMO6', 'PROMO9', 'PROMO-CharizardA', 'PROMO-CharizardB', 'PROMO-1stA', 'PROMO-1stB']:
             for card in v.cards:
                 c = card
                 c.collection_attr.set_symbol = 'SSP'
@@ -357,6 +363,7 @@ def main():
     del database['PROMO2']
     del database['PROMO4']
     del database['PROMO6']
+    del database['PROMO9']
 
     for k, v in database.items():
         if database[k].symbol.find('PROMO') != -1:
@@ -381,6 +388,8 @@ def main():
     database['PROMO-MARNIE'].set_id = 'PROMO-MARNIE'
     database['PROMO-CharizardA'].set_id = 'PROMO-CharizardA'
     database['PROMO-CharizardB'].set_id = 'PROMO-CharizardB'
+    database['PROMO-1stA'].set_id = 'PROMO-1stA'
+    database['PROMO-1stB'].set_id = 'PROMO-1stB'
 
     for k, v in database.items():
         if k in ['CSMPaC', 'CSMPbC', 'CSMPcC', 'CSMPdC', 'CSMPeC', 'CSMPfC', 'CSMPgC', 'CSMPhC']:

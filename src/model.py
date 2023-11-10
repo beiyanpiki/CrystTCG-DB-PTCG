@@ -57,6 +57,7 @@ class Rarity(Enum):
     SuperRare = 'SR'
     ShinySuperRare = 'SSR'
     CharacterRare = 'CHR'
+    CharacterSuperRare = 'CSR'
     AmazingRare = 'A'
     HyperRare = 'HR'
     UltraRare = 'UR'
