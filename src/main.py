@@ -304,8 +304,6 @@ def main():
         sets = PSet(set_name, set_symbol, set_publish_date, set_series)
 
         for card in collection['cards']:
-            if card['details']['yorenCode'] == 'Y760':
-                pass
             if card['details']['rarityText'].find('☆') != -1:
                 continue
 
@@ -314,6 +312,12 @@ def main():
             card_text = get_card_text(card, card_type)
             mechanic = get_mechanic(card)
             label = get_label(card)
+
+            if card_type == CardType.BasicEnergy and name.find('【') != -1:
+                name = name.replace('【','').replace('】','')
+
+
+
 
             card_idx, coll_num = get_card_in_coll(card)
             artist = card['details'].get('illustratorName', [None])[0]
