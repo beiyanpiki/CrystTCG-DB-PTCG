@@ -303,6 +303,7 @@ def main():
 
         sets = PSet(set_name, set_symbol, set_publish_date, set_series)
 
+        cidx = set()
         for card in collection['cards']:
             if card['details']['rarityText'].find('☆') != -1:
                 continue
@@ -314,10 +315,7 @@ def main():
             label = get_label(card)
 
             if card_type == CardType.BasicEnergy and name.find('【') != -1:
-                name = name.replace('【','').replace('】','')
-
-
-
+                name = name.replace('【', '').replace('】', '')
 
             card_idx, coll_num = get_card_in_coll(card)
             artist = card['details'].get('illustratorName', [None])[0]
@@ -332,7 +330,12 @@ def main():
             card_after = Card(name, card_text, card_type, mechanic, label, pokemon_attr, collect_attr, energy_attr,
                               regulation_mark)
             card_after.img_path = card['image']
-            sets.cards.append(card_after)
+
+            if card_idx in cidx:
+                continue
+            else:
+                sets.cards.append(card_after)
+            cidx.add(card_idx)
         database[set_symbol] = sets
 
     database["SMP"] = database.pop("PROMO")
@@ -430,7 +433,6 @@ def convert_to_json(obj, compress=False):
     return json.dumps(obj, default=custom_encoder, indent=4) if not compress else json.dumps(obj,
                                                                                              default=custom_encoder,
                                                                                              separators=(',', ':'))
-
 
 if __name__ == '__main__':
     data = main()

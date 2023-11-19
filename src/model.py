@@ -279,7 +279,7 @@ class Card:
                               f"{self.pokemon_attr.hp}|"
                               f"{self.pokemon_attr.energy_type.value}|"
                               f"{self.pokemon_attr.ability.name if self.pokemon_attr.ability else ''}|"
-                              f"{[attack.name for attack in self.pokemon_attr.attacks]}|"
+                              f"{[f'{attack.name}|{attack.text}|{attack.damage}' for attack in self.pokemon_attr.attacks]}|"
                               f"{self.pokemon_attr.weakness.value if self.pokemon_attr.weakness else ''}|"
                               f"{self.pokemon_attr.resistance.resistance_type.value if self.pokemon_attr.resistance else ''}|"
                               f"{self.pokemon_attr.resistance.resistance_value if self.pokemon_attr.resistance else ''}|"
