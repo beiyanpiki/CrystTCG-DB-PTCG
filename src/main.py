@@ -148,19 +148,19 @@ def get_card_in_coll(card) -> Tuple[str | None, str | None]:
 
 def get_energy_by_eid_yorenid(eid: str) -> Energy:
     match eid:
-        case '1' | 'Y457':
+        case '1' | 'Y457' | 'Y755':
             return Energy.Grass
-        case '2' | 'Y458':
+        case '2' | 'Y458' | 'Y756':
             return Energy.Fire
         case '3' | 'Y459':
             return Energy.Water
-        case '4' | 'Y460':
+        case '4' | 'Y460' | 'Y757':
             return Energy.Lightning
-        case '5' | 'Y461':
+        case '5' | 'Y461' | 'Y758':
             return Energy.Psychic
-        case '6' | 'Y462':
+        case '6' | 'Y462' | 'Y759':
             return Energy.Fighting
-        case '7' | 'Y463':
+        case '7' | 'Y463' | 'Y760':
             return Energy.Darkness
         case '8' | 'Y464':
             return Energy.Metal
@@ -176,6 +176,7 @@ def get_energy_by_eid_yorenid(eid: str) -> Energy:
             return Energy.Addition
         case _:
             print("Error: Not valid eid or yorenId")
+            print(eid)
             exit(1)
 
 
@@ -303,6 +304,8 @@ def main():
         sets = PSet(set_name, set_symbol, set_publish_date, set_series)
 
         for card in collection['cards']:
+            if card['details']['yorenCode'] == 'Y760':
+                pass
             if card['details']['rarityText'].find('☆') != -1:
                 continue
 
@@ -431,9 +434,6 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
-            if card.collection_attr.set_symbol == 'SSP' and card.collection_attr.card_no == '028':
-                print(card.img_path)
-
             src = f'../PTCG-CHS-Datasets/{card.img_path}'.replace('\\', '/')
             dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'.replace('\\', '/')
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}'.replace('\\', '/'))
