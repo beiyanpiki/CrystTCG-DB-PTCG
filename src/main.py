@@ -438,6 +438,9 @@ if __name__ == '__main__':
             dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'.replace('\\', '/')
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}'.replace('\\', '/'))
             folder.mkdir(parents=True, exist_ok=True)
+            if Path(dst).is_file():
+                print(f"{card.collection_attr.set_symbol}-{card.collection_attr.card_no}: This file is exist, please check the data")
+
             shutil.copy2(src, dst)
         sets.append(v)
 
