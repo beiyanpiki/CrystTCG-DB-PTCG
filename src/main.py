@@ -227,11 +227,11 @@ def get_pokemon_attr(card) -> PokemonAttr:
 
     attacks = []
     for attack in card['details']['abilityItemList']:
-        atk_name = "" if attack['abilityName'] =='none' else attack['abilityName']
+        atk_name = "" if attack['abilityName'] == 'none' else attack['abilityName']
         atk_text = "" if attack['abilityText'] == 'none' else attack['abilityText']
         atk_damage = "" if attack['abilityDamage'] == 'none' else attack['abilityDamage']
 
-        if atk_name=="" and atk_text=="" and atk_damage=="":
+        if atk_name == "" and atk_text == "" and atk_damage == "":
             continue
 
         atk_cost = attack.get('abilityCost', '')
@@ -320,7 +320,9 @@ def main():
             card_idx, coll_num = get_card_in_coll(card)
             artist = card['details'].get('illustratorName', [None])[0]
             rarity = get_rarity(card)
-            collect_attr = CollectionAttr(set_series, set_symbol, coll_num, card_idx, artist, rarity)
+            card_symbol = card['details'].get('commodityList', [{'commodityCode': set_symbol}])[0].get('commodityCode',
+                                                                                                       set_symbol)
+            collect_attr = CollectionAttr(set_series, card_symbol, coll_num, card_idx, artist, rarity)
             regulation_mark = card['details'].get('regulationMarkText', None)
             pokemon_attr = get_pokemon_attr(card) if card_type == CardType.Pokemon else None
             energy_attr = EnergyAttr(
@@ -331,11 +333,14 @@ def main():
                               regulation_mark)
             card_after.img_path = card['image']
 
-            if card_idx in cidx:
+            if card_after.collection_attr.card_no is None:
+                continue
+            elif card_after.collection_attr.card_no in cidx:
                 continue
             else:
                 sets.cards.append(card_after)
-            cidx.add(card_idx)
+                cidx.add(card_after.collection_attr.card_no)
+
         database[set_symbol] = sets
 
     database["SMP"] = database.pop("PROMO")
@@ -434,6 +439,7 @@ def convert_to_json(obj, compress=False):
                                                                                              default=custom_encoder,
                                                                                              separators=(',', ':'))
 
+
 if __name__ == '__main__':
     data = main()
 
@@ -441,11 +447,13 @@ if __name__ == '__main__':
     for k, v in data.items():
         for card in v.cards:
             src = f'../PTCG-CHS-Datasets/{card.img_path}'.replace('\\', '/')
-            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'.replace('\\', '/')
+            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'.replace('\\',
+                                                                                                                '/')
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}'.replace('\\', '/'))
             folder.mkdir(parents=True, exist_ok=True)
             if Path(dst).is_file():
-                print(f"{card.collection_attr.set_symbol}-{card.collection_attr.card_no}: This file is exist, please check the data")
+                print(
+                    f"{card.collection_attr.set_symbol}-{card.collection_attr.card_no}: This file is exist, please check the data")
                 continue
             shutil.copy2(src, dst)
         sets.append(v)
