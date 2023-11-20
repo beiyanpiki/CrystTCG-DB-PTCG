@@ -320,8 +320,8 @@ def main():
             card_idx, coll_num = get_card_in_coll(card)
             artist = card['details'].get('illustratorName', [None])[0]
             rarity = get_rarity(card)
-            card_symbol = card['details'].get('commodityList', [{'commodityCode': set_symbol}])[0].get('commodityCode',
-                                                                                                       set_symbol)
+            card_symbol = card['details'].get('commodityList', [{'commodityCode': set_symbol}])[-1].get('commodityCode',
+                                                                                                        set_symbol)
             collect_attr = CollectionAttr(set_series, card_symbol, coll_num, card_idx, artist, rarity)
             regulation_mark = card['details'].get('regulationMarkText', None)
             pokemon_attr = get_pokemon_attr(card) if card_type == CardType.Pokemon else None
@@ -405,11 +405,6 @@ def main():
     database['PROMO-CharizardB'].set_id = 'PROMO-CharizardB'
     database['PROMO-1stA'].set_id = 'PROMO-1stA'
     database['PROMO-1stB'].set_id = 'PROMO-1stB'
-
-    for k, v in database.items():
-        if k in ['CSMPaC', 'CSMPbC', 'CSMPcC', 'CSMPdC', 'CSMPeC', 'CSMPfC', 'CSMPgC', 'CSMPhC']:
-            database[k].cards = [c for c in database[k].cards if
-                                 not (c.type == CardType.BasicEnergy and c.regulation_mark == 'C')]
 
     for k, v in database.items():
         if k == 'SMP':
