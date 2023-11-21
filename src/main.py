@@ -7,13 +7,16 @@ from src.model import PSet, Series, Label, CardType, Mechanic, CollectionAttr, R
     Ability, Resistance, Attack, Card, EnergyAttr
 
 raw_json_path = '../PTCG-CHS-Datasets/ptcg_chs_infos.json'
-
+all_symbols = []
 with open(raw_json_path, 'r') as f:
     contents = f.read()
     table = json.loads(contents)
     collections = table['collections']
     collections.reverse()
+    for coll in collections:
+        all_symbols.append(coll['commodityCode'])
     f.close()
+
 
 
 def get_series(series_id: str, set_name: str) -> Series:
@@ -246,6 +249,12 @@ def get_pokemon_attr(card) -> PokemonAttr:
                        attacks)
 
 
+def get_earlier_symbol(symbols) -> str:
+    sorted_symbols = sorted(symbols, key=lambda x: all_symbols.index(x))
+    return sorted_symbols[0]
+
+
+
 def get_card_text(card, card_type) -> str:
     res = ''
     if card_type == CardType.Pokemon:
@@ -320,9 +329,11 @@ def main():
             card_idx, coll_num = get_card_in_coll(card)
             artist = card['details'].get('illustratorName', [None])[0]
             rarity = get_rarity(card)
-            card_symbol = card['details'].get('commodityList', [{'commodityCode': set_symbol}])[-1].get('commodityCode',
-                                                                                                        set_symbol)
-            collect_attr = CollectionAttr(set_series, card_symbol, coll_num, card_idx, artist, rarity)
+
+            card_symbols = card['details'].get('commodityList', [{'commodityCode': set_symbol}])
+            card_symbols = [c.get('commodityCode', set_symbol) for c in card_symbols]
+
+            collect_attr = CollectionAttr(set_series, get_earlier_symbol(card_symbols), coll_num, card_idx, artist, rarity)
             regulation_mark = card['details'].get('regulationMarkText', None)
             pokemon_attr = get_pokemon_attr(card) if card_type == CardType.Pokemon else None
             energy_attr = EnergyAttr(
@@ -334,7 +345,7 @@ def main():
             card_after.img_path = card['image']
 
             if card_after.collection_attr.card_no is None:
-                continue
+                sets.cards.append(card_after)
             elif card_after.collection_attr.card_no in cidx:
                 continue
             else:
