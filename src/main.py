@@ -86,14 +86,23 @@ def get_mechanic(card) -> Optional[Mechanic]:
 
 
 def get_label(card) -> Optional[Label]:
-    # TAG TEAM: Pokemon and Supporter card can have TAG TEAM
-    if card.get('specialCard', None) == '5':
-        return Label.TAG_TEAM
-
     # Ultra Beast: Only Pokemon has Ultra Beast
     pt = [x for x in card.get('pokemonType', '').split('|') if x != '']
     if '5' in pt:
         return Label.Ultra_Beast
+
+    # TAG TEAM: Pokemon and Supporter card can have TAG TEAM
+    if card.get('specialCard', None) == '5':
+        return Label.TAG_TEAM
+
+    # Single Strike: All card can have Single Strike
+    if card.get('specialCard', None) == '1':
+        return Label.Single_Strike
+
+    # Rapid Strike: All card can have Rapid Strike
+    if card.get('specialCard', None) == '2':
+        return Label.Rapid_Strike
+
 
     return None
 
