@@ -26,7 +26,7 @@ for ban_card in exp_banned:
 
 with open('../output/banned.json', 'w') as f:
     f.write(json.dumps({
-        'std': [],
-        'exp': exp_banned_effect,
-        'sm': [],
+        'Standard': [],
+        'Expanded': exp_banned_effect,
+        'Sun & Moon Series': [],
     }, separators=(',', ':')))
