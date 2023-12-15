@@ -18,7 +18,6 @@ with open(raw_json_path, 'r') as f:
     f.close()
 
 
-
 def get_series(series_id: str, set_name: str) -> Series:
     match set_name:
         case '特典卡·太阳&月亮':
@@ -102,7 +101,6 @@ def get_label(card) -> Optional[Label]:
     # Rapid Strike: All card can have Rapid Strike
     if card.get('specialCard', None) == '2':
         return Label.Rapid_Strike
-
 
     return None
 
@@ -263,7 +261,6 @@ def get_earlier_symbol(symbols) -> str:
     return sorted_symbols[0]
 
 
-
 def get_card_text(card, card_type) -> str:
     res = ''
     if card_type == CardType.Pokemon:
@@ -342,7 +339,8 @@ def main():
             card_symbols = card['details'].get('commodityList', [{'commodityCode': set_symbol}])
             card_symbols = [c.get('commodityCode', set_symbol) for c in card_symbols]
 
-            collect_attr = CollectionAttr(set_series, get_earlier_symbol(card_symbols), coll_num, card_idx, artist, rarity)
+            collect_attr = CollectionAttr(set_series, get_earlier_symbol(card_symbols), coll_num, card_idx, artist,
+                                          rarity)
             regulation_mark = card['details'].get('regulationMarkText', None)
             pokemon_attr = get_pokemon_attr(card) if card_type == CardType.Pokemon else None
             energy_attr = EnergyAttr(
@@ -373,6 +371,10 @@ def main():
 
     # Combine PROMO
     cnt = 0
+    for card in database['SMP'].cards:
+        if card.collection_attr.card_no is None:
+            cnt += 1
+            card.collection_attr.card_no = f'NaN{cnt}'
     for k, v in database.items():
         if k in ['PROMO1', 'PROMO2']:
             for card in v.cards:
@@ -393,6 +395,10 @@ def main():
                     cnt += 1
                     c.collection_attr.card_no = f'NaN{cnt}'
                 database['SSP'].cards.append(c)
+    for card in database['SSP'].cards:
+        if card.collection_attr.card_no is None:
+            cnt += 1
+            card.collection_attr.card_no = f'NaN{cnt}'
 
     del database['PROMO1']
     del database['PROMO2']
@@ -434,8 +440,9 @@ def main():
             database[k].name = database[k].name[4:]
         if v.name.find('补充包') != -1:
             database[k].name = database[k].name[4:]
-        database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
 
+        database[k].cards = sorted(database[k].cards, key=sort_cards_by_card_no)
+        pass
         # Fix error
     database = fix_card(database)
 
@@ -461,15 +468,18 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
+            if card.collection_attr.set_symbol == 'SSP' and card.collection_attr.card_no == '077':
+                pass
             src = f'../PTCG-CHS-Datasets/{card.img_path}'.replace('\\', '/')
-            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.jpg'.replace('\\',
+            dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.png'.replace('\\',
                                                                                                                 '/')
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}'.replace('\\', '/'))
             folder.mkdir(parents=True, exist_ok=True)
             if Path(dst).is_file():
+                if card.collection_attr.set_symbol in ['CSAC', 'CSM1DC']:
+                    continue
                 print(
-                    f"{card.collection_attr.set_symbol}-{card.collection_attr.card_no}: This file is exist, please check the data")
-                continue
+                    f"{k}: {card.collection_attr.set_symbol}-{card.collection_attr.card_no}: This file is exist, please check the data")
             shutil.copy2(src, dst)
         sets.append(v)
 
