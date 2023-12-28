@@ -324,7 +324,7 @@ class PSet:
 
         if self.release_date is not None:
             input_format = "%Y-%m-%dT%H:%M:%S" if 'T' in self.release_date else "%Y-%m-%d"
-            x = datetime.strptime(self.release_date, input_format).replace(hour=9, minute=0, second=0)
+            x = datetime.strptime(self.release_date, input_format).replace(hour=0, minute=0, second=0)
             self.release_date = x.isoformat() + 'Z'
 
         if symbol in [
