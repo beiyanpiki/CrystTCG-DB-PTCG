@@ -34,6 +34,8 @@ def get_series(series_id: str, set_name: str) -> Series:
             series_id = '2'
         case '2023宝可梦卡牌大师赛·深圳 特典':
             series_id = '2'
+        case '2023宝可梦卡牌大师赛·上海 特典':
+            series_id = '2'
 
     if series_id == '1':
         return Series.SM
@@ -200,6 +202,8 @@ def get_stage(card) -> Stage:
             return Stage.Stage2
         case 'V进化':
             return Stage.VMAX
+        case 'V-UNION':
+            return Stage.V_UNION
         case _:
             print('wtf????')
             exit(1)
@@ -290,6 +294,7 @@ effect_dic = []
 
 def sort_cards_by_card_no(card: Card):
     card_no = card.collection_attr.card_no
+
     if card_no.isdigit():
         return 0, int(card_no)
     elif card_no.startswith("NaN"):
@@ -368,6 +373,7 @@ def main():
     database['PROMO-CharizardB'] = database.pop("PROMO8")
     database['PROMO-1stA'] = database.pop("PROMO10")
     database['PROMO-1stB'] = database.pop("PROMO11")
+    database['PROMO-PikaVU'] = database.pop("PROMO12")
 
     # Combine PROMO
     cnt = 0
@@ -387,7 +393,9 @@ def main():
 
     cnt = 0
     for k, v in database.items():
-        if k in ['PROMO4', 'PROMO6', 'PROMO9', 'PROMO-CharizardA', 'PROMO-CharizardB', 'PROMO-1stA', 'PROMO-1stB']:
+        if k in ['PROMO4', 'PROMO6', 'PROMO9', 'PROMO13', 'PROMO-CharizardA', 'PROMO-CharizardB', 'PROMO-1stA',
+                 'PROMO-1stB',
+                 'PROMO-PikaVU']:
             for card in v.cards:
                 c = card
                 c.collection_attr.set_symbol = 'SSP'
@@ -400,11 +408,27 @@ def main():
             cnt += 1
             card.collection_attr.card_no = f'NaN{cnt}'
 
+    # Combine CSEC
+    cnt = 0
+    for k, v in database.items():
+        if k in ['CSEC1', "CSEC2", 'CSEC4']:
+            for card in v.cards:
+                c = card
+                c.collection_attr.set_symbol = 'CSEC'
+                if c.collection_attr.card_no is None:
+                    cnt += 1
+                    c.collection_attr.card_no = f'NaN{cnt}'
+                database['CSEC'].cards.append(c)
+
     del database['PROMO1']
     del database['PROMO2']
     del database['PROMO4']
     del database['PROMO6']
     del database['PROMO9']
+    del database['PROMO13']
+    del database['CSEC1']
+    del database['CSEC2']
+    del database['CSEC4']
 
     for k, v in database.items():
         if database[k].symbol.find('PROMO') != -1:
@@ -414,6 +438,7 @@ def main():
                     database[k].cards[i].collection_attr.set_symbol = 'SMP'
                 elif database[k].series == Series.SS:
                     database[k].cards[i].collection_attr.set_symbol = 'SSP'
+
         database[k].cards_num = len(v.cards)
 
     database["SSP"].symbol = 'SSP'
@@ -426,11 +451,18 @@ def main():
     database["SMP"].name = '太阳&月亮 特典卡'
     database['SMP'].release_date = None
 
+    database['CSEC'].symbol = 'CSEC'
+    database["CSEC"].set_id = 'CSEC'
+    database["CSEC"].name = '四方联结礼盒'
+
     database['PROMO-MARNIE'].set_id = 'PROMO-MARNIE'
     database['PROMO-CharizardA'].set_id = 'PROMO-CharizardA'
     database['PROMO-CharizardB'].set_id = 'PROMO-CharizardB'
     database['PROMO-1stA'].set_id = 'PROMO-1stA'
     database['PROMO-1stB'].set_id = 'PROMO-1stB'
+    database['PROMO-PikaVU'].set_id = 'PROMO-PikaVU'
+
+
 
     for k, v in database.items():
         if k == 'SMP':
