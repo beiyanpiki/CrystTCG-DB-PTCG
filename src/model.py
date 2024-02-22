@@ -151,7 +151,7 @@ class PokemonAttr:
     energy_type: Energy
     stage: Stage
     hp: int
-    ability: Optional[Ability]
+    ability: List[Ability]
     ancient_trait: Optional[AncientTrait]
     weakness: Optional[Energy]
     resistance: Optional[Resistance]
@@ -163,7 +163,7 @@ class PokemonAttr:
                  energy_type: Energy,
                  stage: Stage,
                  hp: int,
-                 ability: Optional[Ability],
+                 ability: List[Ability],
                  ancient_trait: Optional[AncientTrait],
                  weakness: Optional[Energy],
                  resistance: Optional[Resistance],
@@ -187,7 +187,7 @@ class PokemonAttr:
             'energy_type': self.energy_type.value,
             'stage': self.stage.value,
             'hp': self.hp,
-            'ability': self.ability.__json__() if self.ability else None,
+            'ability': [ability.__json__() for ability in self.ability],
             'ancient_trait': self.ancient_trait.value if self.ancient_trait else None,
             'weakness': self.weakness.value if self.weakness else None,
             'resistance': self.resistance.__json__() if self.resistance else None,
@@ -278,7 +278,7 @@ class Card:
                               f"{self.pokemon_attr.stage.value}|"
                               f"{self.pokemon_attr.hp}|"
                               f"{self.pokemon_attr.energy_type.value}|"
-                              f"{self.pokemon_attr.ability.name if self.pokemon_attr.ability else ''}|"
+                              f"{[f'{ability.name}' for ability in self.pokemon_attr.ability]}|"
                               f"{[f'{attack.name}|{attack.text}|{attack.damage}' for attack in self.pokemon_attr.attacks]}|"
                               f"{self.pokemon_attr.weakness.value if self.pokemon_attr.weakness else ''}|"
                               f"{self.pokemon_attr.resistance.resistance_type.value if self.pokemon_attr.resistance else ''}|"

@@ -218,18 +218,15 @@ def get_pokemon_attr(card) -> PokemonAttr:
     stage = get_stage(card)
     hp = card['details']['hp']
 
+    abilities = []
+    # Before CSEC, a Pokémon only have multi abilities.
     if 'featureName' in card['details'] and 'featureText' in card['details']:
-        ability = (card['details'].get('featureName', None), card['details'].get('featureText', None))
-    # After CSEC, Raw data change it ability structure
+        abilities.append(Ability(card['details'].get('featureName', None), card['details'].get('featureText', None)))
+    # After CSEC, a Pokémon may have multi abilities, raw data change it ability structure,
     elif 'cardFeatureItemList' in card['details']:
-        ability = (card['details']['cardFeatureItemList'][0]['featureName'],
-                   card['details']['cardFeatureItemList'][0]['featureDesc'])
-    else:
-        ability = None
-    if ability is not None:
-        ability = Ability(ability[0], ability[1])
-    else:
-        ability = None
+        for feat in card['details']['cardFeatureItemList']:
+            abilities.append(Ability(feat['featureName'], feat['featureDesc']))
+
     ancient_trait = None
 
     weakness_type = card['details'].get('weaknessType', None)
@@ -264,7 +261,7 @@ def get_pokemon_attr(card) -> PokemonAttr:
 
         atk = Attack(atk_name, atk_text, atk_cost, atk_damage)
         attacks.append(atk)
-    return PokemonAttr(energy_type, stage, hp, ability, ancient_trait, weakness, resistance, retreat_cost, pokedex,
+    return PokemonAttr(energy_type, stage, hp, abilities, ancient_trait, weakness, resistance, retreat_cost, pokedex,
                        attacks)
 
 
