@@ -443,7 +443,7 @@ def main():
     database['CSFC'].cards = []
     cnt = 0
     for k, v in database.items():
-        if k in ['CSFC1', "CSFC2", 'CSFC3', 'CSFC4']:
+        if k in ['CSFC1']:
             for card in v.cards:
                 c = card
                 c.collection_attr.set_symbol = 'CSFC'
