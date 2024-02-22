@@ -1,3 +1,4 @@
+import copy
 import json
 import shutil
 from pathlib import Path
@@ -369,13 +370,14 @@ def main():
     database["SMP"] = database.pop("PROMO")
     database['SSP'] = database.pop("PROMO3")
     database['PROMO-MARNIE'] = database.pop("PROMO5")
-    database['PROMO-CharizardA'] = database.pop("PROMO7")
+    database['PROMO-Charizard'] = database.pop("PROMO7")
     database['PROMO-CharizardB'] = database.pop("PROMO8")
-    database['PROMO-1stA'] = database.pop("PROMO10")
+    database['PROMO-1st'] = database.pop("PROMO10")
     database['PROMO-1stB'] = database.pop("PROMO11")
     database['PROMO-PikaVU'] = database.pop("PROMO12")
+    database['CSFC'] = copy.deepcopy(database['CSFC1'])
 
-    # Combine PROMO
+    # PROMO SMP
     cnt = 0
     for card in database['SMP'].cards:
         if card.collection_attr.card_no is None:
@@ -391,9 +393,10 @@ def main():
                     c.collection_attr.card_no = f'NaN{cnt}'
                 database['SMP'].cards.append(c)
 
+    # PROMO SSP
     cnt = 0
     for k, v in database.items():
-        if k in ['PROMO4', 'PROMO6', 'PROMO9', 'PROMO13', 'PROMO-CharizardA', 'PROMO-CharizardB', 'PROMO-1stA',
+        if k in ['PROMO4', 'PROMO6', 'PROMO9', 'PROMO13', 'PROMO-Charizard', 'PROMO-CharizardB', 'PROMO-1st',
                  'PROMO-1stB',
                  'PROMO-PikaVU']:
             for card in v.cards:
@@ -408,6 +411,22 @@ def main():
             cnt += 1
             card.collection_attr.card_no = f'NaN{cnt}'
 
+    # PROMO-Charizard, PROMO-CharizardB
+    for k, v in database.items():
+        if k in ["PROMO-CharizardB"]:
+            for card in v.cards:
+                c = card
+                c.collection_attr.set_symbol = 'SSP'
+                database['PROMO-Charizard'].cards.append(c)
+
+    # PROMO-1st
+    for k, v in database.items():
+        if k in ["PROMO-1stB"]:
+            for card in v.cards:
+                c = card
+                c.collection_attr.set_symbol = 'SSP'
+                database['PROMO-1st'].cards.append(c)
+
     # Combine CSEC
     cnt = 0
     for k, v in database.items():
@@ -420,15 +439,34 @@ def main():
                     c.collection_attr.card_no = f'NaN{cnt}'
                 database['CSEC'].cards.append(c)
 
+    # Combine CSFC
+    database['CSFC'].cards = []
+    cnt = 0
+    for k, v in database.items():
+        if k in ['CSFC1', "CSFC2", 'CSFC3', 'CSFC4']:
+            for card in v.cards:
+                c = card
+                c.collection_attr.set_symbol = 'CSFC'
+                if c.collection_attr.card_no is None:
+                    cnt += 1
+                    c.collection_attr.card_no = f'NaN{cnt}'
+                database['CSFC'].cards.append(c)
+
     del database['PROMO1']
     del database['PROMO2']
     del database['PROMO4']
     del database['PROMO6']
     del database['PROMO9']
     del database['PROMO13']
+    del database['PROMO-CharizardB']
+    del database['PROMO-1stB']
     del database['CSEC1']
     del database['CSEC2']
     del database['CSEC4']
+    del database['CSFC1']
+    del database['CSFC2']
+    del database['CSFC3']
+    del database['CSFC4']
 
     for k, v in database.items():
         if database[k].symbol.find('PROMO') != -1:
@@ -451,18 +489,25 @@ def main():
     database["SMP"].name = '太阳&月亮 特典卡'
     database['SMP'].release_date = None
 
-    database['CSEC'].symbol = 'CSEC'
-    database["CSEC"].set_id = 'CSEC'
-    database["CSEC"].name = '四方联结礼盒'
-
     database['PROMO-MARNIE'].set_id = 'PROMO-MARNIE'
-    database['PROMO-CharizardA'].set_id = 'PROMO-CharizardA'
-    database['PROMO-CharizardB'].set_id = 'PROMO-CharizardB'
-    database['PROMO-1stA'].set_id = 'PROMO-1stA'
-    database['PROMO-1stB'].set_id = 'PROMO-1stB'
+
+    database['PROMO-Charizard'].symbol = 'PROMO'
+    database['PROMO-Charizard'].set_id = 'PROMO-Charizard'
+    database['PROMO-Charizard'].name = '喷火龙VMAX套装礼盒'
+
+    database['PROMO-1st'].symbol = 'PROMO'
+    database['PROMO-1st'].set_id = 'PROMO-1st'
+    database['PROMO-1st'].name = '一周年礼盒'
+
     database['PROMO-PikaVU'].set_id = 'PROMO-PikaVU'
 
+    database['CSEC'].symbol = 'CSEC'
+    database["CSEC"].set_id = 'CSEC'
+    database["CSEC"].name = '四方联结系列礼盒'
 
+    database['CSFC'].symbol = 'CSFC'
+    database['CSFC'].set_id = 'CSFC'
+    database['CSFC'].name = '龙之再临系列礼盒'
 
     for k, v in database.items():
         if k == 'SMP':
@@ -500,18 +545,11 @@ if __name__ == '__main__':
     sets = []
     for k, v in data.items():
         for card in v.cards:
-            if card.collection_attr.set_symbol == 'SSP' and card.collection_attr.card_no == '077':
-                pass
             src = f'../PTCG-CHS-Datasets/{card.img_path}'.replace('\\', '/')
             dst = f'../output/img/{card.collection_attr.set_symbol}/{card.collection_attr.card_no}.png'.replace('\\',
                                                                                                                 '/')
             folder = Path(f'../output/img/{card.collection_attr.set_symbol}'.replace('\\', '/'))
             folder.mkdir(parents=True, exist_ok=True)
-            if Path(dst).is_file():
-                if card.collection_attr.set_symbol in ['CSAC', 'CSM1DC']:
-                    continue
-                print(
-                    f"{k}: {card.collection_attr.set_symbol}-{card.collection_attr.card_no}: This file is exist, please check the data")
             shutil.copy2(src, dst)
         sets.append(v)
 
