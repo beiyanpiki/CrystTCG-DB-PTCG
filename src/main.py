@@ -218,8 +218,15 @@ def get_pokemon_attr(card) -> PokemonAttr:
     stage = get_stage(card)
     hp = card['details']['hp']
 
-    ability = (card['details'].get('featureName', None), card['details'].get('featureText', None))
-    if ability[0] is not None:
+    if 'featureName' in card['details'] and 'featureText' in card['details']:
+        ability = (card['details'].get('featureName', None), card['details'].get('featureText', None))
+    # After CSEC, Raw data change it ability structure
+    elif 'cardFeatureItemList' in card['details']:
+        ability = (card['details']['cardFeatureItemList'][0]['featureName'],
+                   card['details']['cardFeatureItemList'][0]['featureDesc'])
+    else:
+        ability = None
+    if ability is not None:
         ability = Ability(ability[0], ability[1])
     else:
         ability = None
