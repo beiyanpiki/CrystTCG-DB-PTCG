@@ -105,6 +105,10 @@ def get_label(card) -> Optional[Label]:
     if card.get('specialCard', None) == '2':
         return Label.Rapid_Strike
 
+    # Fusion Strike: All card can have Fusion Strike
+    if card.get('specialCard', None) == '3':
+        return Label.Fusion_Strike
+
     return None
 
 
