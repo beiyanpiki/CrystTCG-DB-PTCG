@@ -223,7 +223,7 @@ def get_pokemon_attr(card) -> PokemonAttr:
     hp = card['details']['hp']
 
     abilities = []
-    # Before CSEC, a Pokémon only have multi abilities.
+    # Before CSEC, a Pokémon only have one abilities.
     if 'featureName' in card['details'] and 'featureText' in card['details']:
         abilities.append(Ability(card['details'].get('featureName', None), card['details'].get('featureText', None)))
     # After CSEC, a Pokémon may have multi abilities, raw data change it ability structure,
@@ -460,6 +460,18 @@ def main():
                     c.collection_attr.card_no = f'NaN{cnt}'
                 database['CSFC'].cards.append(c)
 
+    # Combine CSHC
+    cnt = 0
+    for k, v in database.items():
+        if k in ['CSHC1', "CSHC2"]:
+            for card in v.cards:
+                c = card
+                c.collection_attr.set_symbol = 'CSHC'
+                if c.collection_attr.card_no is None:
+                    cnt += 1
+                    c.collection_attr.card_no = f'NaN{cnt}'
+                database['CSHC'].cards.append(c)
+
     del database['PROMO1']
     del database['PROMO2']
     del database['PROMO4']
@@ -475,6 +487,11 @@ def main():
     del database['CSFC2']
     del database['CSFC3']
     del database['CSFC4']
+    del database['CS4.1C-1']
+    del database['CS4.1C-2']
+    del database['CS4.1C-3']
+    del database['CSHC1']
+    del database['CSHC2']
 
     for k, v in database.items():
         if database[k].symbol.find('PROMO') != -1:
@@ -516,6 +533,12 @@ def main():
     database['CSFC'].symbol = 'CSFC'
     database['CSFC'].set_id = 'CSFC'
     database['CSFC'].name = '龙之再临系列礼盒'
+
+    database['CS4.1C'].name = '辉耀能量 宝可梦艺术卡套礼盒'
+
+    database['CSHC'].symbol = 'CSHC'
+    database['CSHC'].set_id = 'CSHC'
+    database['CSHC'].name = '伊布进阶礼盒'
 
     for k, v in database.items():
         if k == 'SMP':
